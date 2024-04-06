@@ -1,0 +1,15 @@
+asgiref==3.7.2
+dj-rest-auth==4.0.1
+Django==4.2.4
+django-filter==23.2
+djangorestframework==3.14.0
+Markdown==3.4.4
+mss==9.0.1
+numpy==1.25.2
+opencv-python==4.8.0.76
+Pillow==10.0.0
+python-dotenv==1.0.0
+pytz==2023.3
+six==1.16.0
+sqlparse==0.4.4
+whitenoise==6.5.0
