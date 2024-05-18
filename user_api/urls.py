@@ -4,7 +4,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 # views control
-from .views import UserViewSet, ViewUserMonitor, ViewMainData, save_data, SnippetList
+from .views import UserViewSet, DailyViewMainData, save_data, SnippetList
 
 
 router = routers.DefaultRouter()
@@ -16,10 +16,8 @@ urlpatterns = [
 
     # Testing api user
     # path('', ViewUserMonitor.as_view()),
-    path('<int:pk>', ViewUserMonitor.as_view()),
-    path('main/', ViewMainData.as_view()),
+    path('main/<int:pk>', DailyViewMainData.as_view()),
+    path('main/', DailyViewMainData.as_view()),
     path('data', save_data),
     path('list', SnippetList.as_view()),
 ]
-
-

@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 # from django.contrib.auth.models import User
 from accounts.models import MainUser
-from .serializer import UserSerializer, UserModelSerializer, CategorySerializer
+from .serializer import UserSerializer, UserModelSerializer, CategorySerializer, DailyUserModelSerializer
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import permissions, authentication, generics, status
@@ -31,10 +31,23 @@ class ViewUserMonitor(APIView):
     #     return Response({'message': 'message is recieved'})
 
 
-class ViewMainData(generics.ListAPIView):
-    queryset = UserMonitor.objects.all()
-    serializer_class = UserModelSerializer
+class DailyViewMainData(APIView):
+    # queryset = UserMonitor.objects.all()
+    # serializer_class = DailyUserModelSerializer
     # authentication_classes = [authentication.authenticates]
+
+    def get(self, request, pk=None):
+        get_all = UserMonitor.objects.all()
+        serializer = DailyUserModelSerializer(get_all, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        print(request.data)
+        ds = DailyUserModelSerializer(data=request.data)
+        if ds.is_valid():
+            ds.save()
+            return Response(ds.data, status=status.HTTP_201_CREATED)
+        return Response(ds.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])

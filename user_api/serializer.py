@@ -24,3 +24,15 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
+
+# Daily Monitoring
+class DailyUserModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserMonitor
+        # fields = '__all__'
+        fields = ("user_name", "video_url", "thumb_url", "verification_code", "ip_address",
+                  "image_thumpnail", "videos", "os", "date_create")
+        # fields = ("user_name", "video_url", "verification_code", "ip_address",
+        #           "image_thumpnail", "videos", "os", "date_create")

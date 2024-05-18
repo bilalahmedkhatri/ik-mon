@@ -36,15 +36,18 @@ class RecordedVideos(models.Model):
 
 
 class UserMonitor(models.Model):
-    user_name = models.CharField(max_length=255, null=True, blank=True)
+    user_name = models.CharField(
+        max_length=255, unique=True, null=True, blank=True)
     verification_code = models.CharField(max_length=255)
     ip_address = models.CharField(max_length=15, blank=True, null=True)
+    video_url = models.CharField(max_length=100, default="")
+    thumb_url = models.CharField(max_length=100, default="")
     # ip_address_ = models.IntegerField(blank=True, null=True)
     image_thumpnail = models.ForeignKey(
         MonitorThumbnail, on_delete=models.CASCADE)
     videos = models.ForeignKey(RecordedVideos, on_delete=models.CASCADE)
-    os = models.CharField(max_length=255, blank=True, null=True)
-    date_create = models.DateField(auto_now_add=True)
+    os = models.CharField(max_length=100, blank=True, null=True)
+    date_create = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
     # extra_field = models.CharField(max_length=50)
 
