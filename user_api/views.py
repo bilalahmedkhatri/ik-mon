@@ -7,9 +7,11 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import permissions, authentication, generics, status
 from user_api.models import UserMonitor, Category
-
+from django.db.models import Q
+import datetime
 
 # Create your views here.
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = MainUser.objects.all()
@@ -32,12 +34,11 @@ class ViewUserMonitor(APIView):
 
 
 class DailyViewMainData(APIView):
-    # queryset = UserMonitor.objects.all()
-    # serializer_class = DailyUserModelSerializer
-    # authentication_classes = [authentication.authenticates]
 
     def get(self, request, pk=None):
-        get_all = UserMonitor.objects.all()
+        current_date = datetime.date.today()
+        get_all = UserMonitor.objects.filter(
+            Q(date_create__gt=str(current_date.today())))
         serializer = DailyUserModelSerializer(get_all, many=True)
         return Response(serializer.data)
 

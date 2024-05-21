@@ -37,10 +37,10 @@ class RecordedVideos(models.Model):
 
 class UserMonitor(models.Model):
     user_name = models.CharField(
-        max_length=255, unique=True, null=True, blank=True)
+        max_length=255, null=True, blank=True)
     verification_code = models.CharField(max_length=255)
     ip_address = models.CharField(max_length=15, blank=True, null=True)
-    video_url = models.CharField(max_length=100, default="")
+    video_url = models.CharField(max_length=255, default="")
     thumb_url = models.CharField(max_length=100, default="")
     # ip_address_ = models.IntegerField(blank=True, null=True)
     image_thumpnail = models.ForeignKey(
