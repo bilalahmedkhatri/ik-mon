@@ -4,7 +4,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 # views control
-from .views import UserViewSet, DailyViewMainData, save_data, SnippetList
+from .views import UserViewSet, DailyViewMainData, SnippetList, save_data, daily_user_live_status
 
 
 router = routers.DefaultRouter()
@@ -18,6 +18,7 @@ urlpatterns = [
     # path('', ViewUserMonitor.as_view()),
     path('main/<int:pk>', DailyViewMainData.as_view()),
     path('main/', DailyViewMainData.as_view()),
-    path('data', save_data),
+    path('main/live-status-update/<str:video_url>', daily_user_live_status),
+    # path('data', save_data),
     path('list', SnippetList.as_view()),
 ]

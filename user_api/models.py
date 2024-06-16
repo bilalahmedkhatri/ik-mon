@@ -49,6 +49,7 @@ class UserMonitor(models.Model):
     os = models.CharField(max_length=100, blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
+    live_status = models.IntegerField(default=0)
     # extra_field = models.CharField(max_length=50)
 
     def __str__(self):

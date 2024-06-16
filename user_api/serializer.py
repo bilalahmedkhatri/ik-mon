@@ -33,6 +33,13 @@ class DailyUserModelSerializer(serializers.ModelSerializer):
         model = UserMonitor
         # fields = '__all__'
         fields = ("user_name", "video_url", "thumb_url", "verification_code", "ip_address",
-                  "image_thumpnail", "videos", "os", "date_create")
+                  "image_thumpnail", "videos", "os", "date_create", "live_status")
         # fields = ("user_name", "video_url", "verification_code", "ip_address",
         #           "image_thumpnail", "videos", "os", "date_create")
+
+
+class StatusDailyUserModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserMonitor
+        fields = ("live_status")

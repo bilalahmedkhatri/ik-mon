@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 # from django.contrib.auth.models import User
 from accounts.models import MainUser
-from .serializer import UserSerializer, UserModelSerializer, CategorySerializer, DailyUserModelSerializer
+from .serializer import UserSerializer, CategorySerializer, DailyUserModelSerializer, StatusDailyUserModelSerializer
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import permissions, authentication, generics, status
@@ -49,6 +49,14 @@ class DailyViewMainData(APIView):
             gting_dt_4rm_client.save()
             return Response(gting_dt_4rm_client.data, status=status.HTTP_201_CREATED)
         return Response(gting_dt_4rm_client.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def daily_user_live_status(request):
+    status = StatusDailyUserModelSerializer(request.data)
+    if status.is_valid():
+        return Response(status.data, status-status.HTTP_201_CREATED)
+    return Response(status.error, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
