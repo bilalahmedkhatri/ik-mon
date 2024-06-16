@@ -44,11 +44,11 @@ class DailyViewMainData(APIView):
 
     def post(self, request):
         print(request.data)
-        ds = DailyUserModelSerializer(data=request.data)
-        if ds.is_valid():
-            ds.save()
-            return Response(ds.data, status=status.HTTP_201_CREATED)
-        return Response(ds.errors, status=status.HTTP_400_BAD_REQUEST)
+        gting_dt_4rm_client = DailyUserModelSerializer(data=request.data)
+        if gting_dt_4rm_client.is_valid():
+            gting_dt_4rm_client.save()
+            return Response(gting_dt_4rm_client.data, status=status.HTTP_201_CREATED)
+        return Response(gting_dt_4rm_client.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])

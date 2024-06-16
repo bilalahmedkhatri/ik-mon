@@ -26,16 +26,25 @@ SECRET_KEY = os.getenv("SECRET_KEY", RANDOM_KEY)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "False"
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOST", 'localhost').split(',')
+ALLOWED_HOSTS = ['*']
+#     'localhost:8000',
+#     # '192.168.1.85',
+#     'localhost:3000',
+#     '127.0.0.1:3000',
+# ]
+# ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOST", 'localhost').split(',') # not working with env
 
 # Allowing to host
 CORS_ALLOWED_ORIGINS = [
+    # 'http://192.168.1.85:8000',
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    'http://192.168.38.28:3000',
+
 ]
 
 CORS_ALLOWED_ORIGINS = os.getenv(
-    "CORS_ALLOWED_ORIGINS", "http://localhost:3000").split(',')
+    "CORS_ALLOWED_ORIGINS", "http://192.168.1.85:3000").split(',')
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -72,7 +81,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'dj_rest_auth.registration',
+    # 'dj_rest_auth.registration',
 
     # API call
     'corsheaders',
@@ -93,6 +102,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'api_set.urls'
@@ -100,7 +112,9 @@ ROOT_URLCONF = 'api_set.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            str(BASE_DIR.joinpath("ftd")),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -170,10 +184,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/",)
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/",)
 
-STATIC_ROOT = os.path.join(BASE_DIR, "assets/")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static",),
+    os.path.join(BASE_DIR, "ftd/static",),
     os.path.join(BASE_DIR, "media",),
 ]
 
