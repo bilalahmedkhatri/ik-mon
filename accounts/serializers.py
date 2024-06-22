@@ -12,5 +12,3 @@ class MainUserSaveSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainCustomUser
         fields = ['last_name']
-        # fields = ["os_name"]
-        # field = ["username", "os", "datetime"]

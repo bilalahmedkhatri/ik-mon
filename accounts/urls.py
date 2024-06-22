@@ -7,8 +7,7 @@ from accounts.views import MainUserView, get_data
 urlpatterns = [
     path('user/', MainUserView.as_view()),
     path('usr-sys-det', get_data),
-    # path('m_user/<int:pk>', MainUserView.as_view()),
-    # path('', )
+    # path('user/<int:pk>', MainUserView.as_view()),
 ]
 
 if settings.DEBUG:

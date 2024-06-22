@@ -1,11 +1,17 @@
 import requests
 
 
-url = "http://localhost:8000/m_user/"
+url = "http://192.168.1.85:8000/"
 
-x = requests.get(url=url)
 
-for y in x.json():
-    print(y)
-print(x.request.headers)
-print(x.request.body)
+def test_url(url=None) -> str:
+    try:
+        respons = requests.get(url=url)
+    except:
+        print("Connection refused by the server..")
+
+    print(respons.status_code)
+    print(respons.json())
+
+
+test_url(url)

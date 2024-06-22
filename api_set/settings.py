@@ -6,47 +6,43 @@ from dotenv import load_dotenv
 
 RANDOM_KEY = get_random_secret_key()
 
+
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Custom added env file directory location for hosting on ocean
 DOTE_ENV_FILE_PATH = BASE_DIR / '.env.local'
 
+
 if os.path.isfile(DOTE_ENV_FILE_PATH):
     load_dotenv(DOTE_ENV_FILE_PATH)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", RANDOM_KEY)
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "False"
 
-ALLOWED_HOSTS = ['*']
-#     'localhost:8000',
-#     # '192.168.1.85',
-#     'localhost:3000',
-#     '127.0.0.1:3000',
-# ]
-# ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOST", 'localhost').split(',') # not working with env
 
-# Allowing to host
-CORS_ALLOWED_ORIGINS = [
-    # 'http://192.168.1.85:8000',
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://192.168.38.28:3000',
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOST", 'localhost').split(
+    ',')  # not working with env
 
-]
 
-CORS_ALLOWED_ORIGINS = os.getenv(
-    "CORS_ALLOWED_ORIGINS", "http://192.168.1.85:3000").split(',')
+# Allowing to react host
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_HOST", 'http://localhost:3000').split(
+    ',')  # not working with env
 
 CORS_ORIGIN_ALLOW_ALL = True
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -67,12 +63,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-
     # API call
     'corsheaders',
 ]
 
+
 SITE_ID = 1
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
