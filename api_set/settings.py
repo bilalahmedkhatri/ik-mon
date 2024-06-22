@@ -38,10 +38,8 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOST", 'localhost').split(
 
 
 # Allowing to react host
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_HOST", 'http://localhost:3000').split(
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_REACT_HOST", 'http://localhost:3000').split(
     ',')  # not working with env
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
