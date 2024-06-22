@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from accounts.models import MainUser
+from accounts.models import MainCustomUser
 from user_api.models import UserMonitor, Category
 from rest_framework import routers, serializers, viewsets
 
@@ -8,7 +8,7 @@ from rest_framework import routers, serializers, viewsets
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = MainUser
+        model = MainCustomUser
         fields = ['url', 'username', 'email', 'is_staff']
 
 
@@ -39,7 +39,6 @@ class DailyUserModelSerializer(serializers.ModelSerializer):
 
 
 class StatusDailyUserModelSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = UserMonitor
         fields = ("live_status")

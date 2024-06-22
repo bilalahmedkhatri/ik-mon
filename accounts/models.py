@@ -1,15 +1,23 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from django.utils.crypto import get_random_string
 
+from .manager import CustomUserManager
+
 from datetime import datetime
+
+
 # Create your models here.
+class MainCustomUser(AbstractBaseUser, PermissionsMixin):
 
-
-class MainUser(AbstractUser):
+    email = models.EmailField(_('email address'), unique=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now)
 
     def user_profile_photo(instance, file_upload):
-        print("test dir: ", instance)
         date_time = datetime.now()
         char = get_random_string(length=10)
         file_extension = file_upload.split('.')[1]
@@ -33,4 +41,10 @@ class MainUser(AbstractUser):
     type_of_work = models.CharField(
         max_length=50, default='Social Service', verbose_name="Type of work")
 
-    # USERNAME_FIELD = ["phone_no"]
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    def __str__(self) -> str:
+        return self.email

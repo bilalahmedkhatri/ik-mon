@@ -1,16 +1,16 @@
 from rest_framework import serializers
-from accounts.models import MainUser
+from accounts.models import MainCustomUser
 
 
 class MainUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MainUser
+        model = MainCustomUser
         fields = '__all__'
 
 
 class MainUserSaveSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MainUser
+        model = MainCustomUser
         fields = ['last_name']
         # fields = ["os_name"]
         # field = ["username", "os", "datetime"]

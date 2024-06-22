@@ -1,4 +1,4 @@
-from accounts.models import MainUser
+from accounts.models import MainCustomUser
 from accounts.serializers import MainUserSerializer, MainUserSaveSerializer
 from django.http import Http404
 from rest_framework.views import APIView
@@ -13,7 +13,7 @@ class MainUserView(APIView):
     """
 
     def get(self, request, format=None):
-        snippets = MainUser.objects.all()
+        snippets = MainCustomUser.objects.all()
         serializer = MainUserSerializer(snippets, many=True)
         return Response(serializer.data)
 
@@ -31,7 +31,6 @@ class GetDataFramFlaskDesktop():
 
 @api_view(["POST"])
 def get_data(request):
-    print(type(request.data))
     ds = MainUserSaveSerializer(data=request.data, many=True)
     if ds.is_valid():
         ds.save()

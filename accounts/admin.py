@@ -1,12 +1,12 @@
 from collections.abc import Sequence
 from django.contrib import admin
 from django.http.request import HttpRequest
-from accounts.models import MainUser
+from accounts.models import MainCustomUser
 
 # Register your models here.
 
 
-@admin.register(MainUser)
+@admin.register(MainCustomUser)
 class AdminUserMonitor(admin.ModelAdmin):
     def get_list_display(self, request: HttpRequest) -> Sequence[str]:
         return super(AdminUserMonitor, self).get_list_display(request)

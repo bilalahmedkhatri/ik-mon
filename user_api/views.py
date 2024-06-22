@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 # from django.contrib.auth.models import User
-from accounts.models import MainUser
+from accounts.models import MainCustomUser
 from .serializer import UserSerializer, CategorySerializer, DailyUserModelSerializer, StatusDailyUserModelSerializer
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
@@ -9,12 +9,13 @@ from rest_framework import permissions, authentication, generics, status
 from user_api.models import UserMonitor, Category
 from django.db.models import Q
 import datetime
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = MainUser.objects.all()
+    queryset = MainCustomUser.objects.all()
     serializer_class = UserSerializer
 
 
@@ -43,7 +44,6 @@ class DailyViewMainData(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        print(request.data)
         gting_dt_4rm_client = DailyUserModelSerializer(data=request.data)
         if gting_dt_4rm_client.is_valid():
             gting_dt_4rm_client.save()
@@ -60,12 +60,15 @@ def daily_user_live_status(request):
 
 
 @api_view(['POST'])
-def save_data(request):
-    ds = CategorySerializer(data=request.data)
-    if ds.is_valid():
-        ds.save()
-        return Response(ds.data, status=status.HTTP_201_CREATED)
-    return Response(ds.errors, status=status.HTTP_400_BAD_REQUEST)
+def save_data(request, hashcode):
+    # hash = UserMonitor.objects.get(video_url=hashcode)
+    hash = get_object_or_404(UserMonitor, video_url=hashcode)
+    print('hashed address : ', hash)
+    # ds = CategorySerializer(hash, request.data)
+    # if ds.is_valid():
+    #     ds.save()
+    #     return Response(ds.data, status=status.HTTP_201_CREATED)
+    # return Response(ds.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class SnippetList(APIView):

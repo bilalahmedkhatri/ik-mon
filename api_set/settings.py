@@ -48,15 +48,6 @@ CORS_ALLOWED_ORIGINS = os.getenv(
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     # 'rest_framework.permissions.DjangoModelPermissions'
-    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    # ]
-}
-
 # Application definition
 INSTALLED_APPS = [
     # local apps
@@ -76,12 +67,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    # DJ_AUTH_JWT
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    # 'dj_rest_auth.registration',
 
     # API call
     'corsheaders',
@@ -102,9 +87,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    # Add the account middleware:
-    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'api_set.urls'
@@ -198,4 +180,4 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custome user model added for user management
-AUTH_USER_MODEL = "accounts.MainUser"
+AUTH_USER_MODEL = "accounts.MainCustomUser"
